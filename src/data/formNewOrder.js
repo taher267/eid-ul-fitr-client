@@ -1,3 +1,6 @@
+import moment from 'moment';
+const DATE_FORMAT = 'YYYY-MM-DD';
+const today = moment().format(DATE_FORMAT);
 export default [
   {
     name: 'order_no',
@@ -5,16 +8,23 @@ export default [
     rules: {
       required: { value: true, message: `Order no is mandatory!` },
     },
-    inputProps: {
-      shouldFocus: true,
-    },
   },
   {
     name: 'order_date',
     type: 'date',
     label: 'Order Date',
+
     rules: {
       required: { value: true, message: `Order date is mandatory!` },
+      max: {
+        value: today,
+        message: `Order date can't be after today!`,
+      },
+    },
+    // defaultValue: today,
+    // itemProps: {  },
+    inputProps: {
+      max: today,
     },
   },
   {
@@ -23,12 +33,21 @@ export default [
     label: 'Delivery Date',
     rules: {
       required: { value: true, message: `Delivery date is mandatory!` },
+      min: {
+        value: today,
+        message: `Delivery date can't be before today!`,
+      },
+    },
+    // defaultValue: moment().add(10, 'd').format(DATE_FORMAT),
+    // itemProps: {  },
+    inputProps: {
+      min: today,
     },
   },
   {
     name: 'delivery_details',
-    label: 'Delivery Details',
-    inputProps: {
+    label: 'Customer/Delivery Details',
+    itemProps: {
       multiline: true,
       minRows: 4,
     },
@@ -41,6 +60,9 @@ export default [
       required: { value: true, message: `Quantity is mandatory!` },
     },
     valueAsNumber: true,
+    inputProps: {
+      min: 0,
+    },
   },
   {
     name: 'price',
@@ -48,6 +70,10 @@ export default [
     label: 'Price',
     rules: {
       required: { value: true, message: `Price is mandatory!` },
+      min: { value: 0, message: `Price can't less than 0` },
+    },
+    inputProps: {
+      min: 0,
     },
     valueAsNumber: true,
   },
@@ -56,7 +82,10 @@ export default [
     type: 'number',
     label: 'Discount',
     rules: {
-      required: { value: true, message: `Discount is mandatory!` },
+      min: { value: 0, message: `Discount can't less than 0` },
+    },
+    inputProps: {
+      min: 0,
     },
     valueAsNumber: true,
   },
@@ -66,12 +95,16 @@ export default [
     label: 'Due',
     rules: {
       required: { value: true, message: `Due is mandatory!` },
+      min: { value: 0, message: `Due can't less than 0` },
     },
     valueAsNumber: true,
+    inputProps: {
+      min: 0,
+    },
   },
   {
     name: 'status',
-    inputProps: {
+    itemProps: {
       select: true,
     },
     label: 'Status',
@@ -89,7 +122,7 @@ export default [
   },
   {
     name: 'order_type',
-    inputProps: {
+    itemProps: {
       select: true,
     },
     label: 'Order type',

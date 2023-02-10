@@ -2,10 +2,15 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { Inter } from '@next/font/google';
 import styles from '@/styles/Home.module.css';
+import axios from '../axios';
+import Box from '@mui/material/Box';
+import { DataGrid } from '@mui/x-data-grid';
+import MainLayout from '@/layouts/mainLayout';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export default function Home() {
+export default function Order({ orders }) {
+  // console.log(orders);
   return (
     <>
       <Head>
@@ -14,12 +19,87 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
-      <main className={styles.main}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia illum
-        dolor vero earum sint eaque praesentium ratione dolorem recusandae,
-        accusantium impedit commodi, rem saepe, soluta voluptates quaerat ipsa
-        quo doloribus.
-      </main>
+      <MainLayout>
+        <Box sx={{ width: '100%' }}>
+          <Box sx={{ width: '100%' }}>
+            <DataGrid
+              autoHeight
+              rows={orders}
+              columns={[
+                { field: '_id', flex: 0.35, headerName: 'ID', hide: false },
+                {
+                  field: 'order_no',
+                  flex: 0.3,
+                  headerName: 'Order No',
+                  editable: true,
+                },
+                {
+                  field: 'quantity',
+                  flex: 0.3,
+                  headerName: 'Quantity',
+                  editable: true,
+                },
+                {
+                  field: 'price',
+                  flex: 0.2,
+                  headerName: 'Price',
+                  editable: true,
+                },
+                {
+                  field: 'due',
+                  flex: 0.2,
+                  headerName: 'Due',
+                  editable: true,
+                },
+                {
+                  field: 'status',
+                  flex: 0.35,
+                  headerName: 'Status',
+                  headerAlign: 'center',
+                  type: 'singleSelect',
+                  editable: true,
+                  valueOptions: [
+                    'PROCESSING',
+                    'ALTER',
+                    'COMPLETED',
+                    'DELIVERED',
+                    'TRAIL',
+                    'RETURN',
+                  ],
+                },
+                {
+                  field: 'order_type',
+                  flex: 0.35,
+                  headerName: 'Order Type',
+                  editable: true,
+                  type: 'singleSelect',
+                  valueOptions: ['READYMADE', 'TAILORS'],
+                },
+                {
+                  field: 'delivery_details',
+                  flex: 0.6,
+                  headerName: 'Customer/Delivery Details',
+                  editable: true,
+                },
+                {
+                  field: 'order_date',
+                  flex: 0.5,
+                  headerName: 'Order Date',
+                  editable: true,
+                },
+              ]}
+              getRowId={(row) => row._id}
+            />
+          </Box>
+        </Box>
+      </MainLayout>
     </>
   );
 }
+
+export const getStaticProps = async () => {
+  const { data } = await axios.get('orders');
+  return {
+    props: { orders: data },
+  };
+};

@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Nav from '../Nav';
 import Head from 'next/head';
 import csses from './layout.module.css';
+// import styles from '@/styles/Home.module.css';
 
 const theme = createTheme({
   palette: {
@@ -19,7 +20,9 @@ export default function MainLayout({ children }) {
       </Head>
       <ThemeProvider theme={theme}>
         <Box className={csses.layoutContainer}>
-          <Box className={csses.layoutHeader}>HEADER</Box>
+          <Box className={csses.layoutHeader}>
+            <Nav />
+          </Box>
           <Box className={csses.layoutMenu}>MENU</Box>
           <Box className={csses.layoutContent}>{children}</Box>
           <Box className={csses.layoutFooter}>FOOTER</Box>
