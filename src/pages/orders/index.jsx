@@ -8,6 +8,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import MainLayout from '@/layouts/mainLayout';
 import moment from 'moment';
 import { Typography } from '@mui/material';
+import Link from 'next/link';
 
 export default function Order({ orders }) {
   // console.log(orders);
@@ -116,9 +117,9 @@ export default function Order({ orders }) {
                     return (
                       <Box>
                         <Typography>
-                          <a target="_blank" href={`/orders/${row._id}`}>
-                            View
-                          </a>
+                          <Link href={`/orders/${row._id}`} passHref>
+                            <a target="_blank">View</a>
+                          </Link>
                         </Typography>
                       </Box>
                     );

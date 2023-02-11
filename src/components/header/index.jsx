@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 
-export default () => {
+export default function Header() {
   return (
     <header
       style={{
@@ -18,4 +18,4 @@ export default () => {
       </Box>
     </header>
   );
-};
+}
