@@ -4,7 +4,7 @@ import { Inter } from '@next/font/google';
 import styles from '@/styles/Home.module.css';
 
 import Box from '@mui/material/Box';
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import MainLayout from '@/layouts/mainLayout';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -158,6 +158,18 @@ export default function Order() {
               rows={Array.isArray(data) ? data : []}
               columns={columns}
               getRowId={(row) => row._id}
+              components={{
+                Toolbar: GridToolbar,
+              }}
+              getRowClassName={(params) => {
+                const status = params.row.status;
+                const delivery = params.row.delivery_date;
+                const success = ['DELIVIRED', 'COMPLETED'];
+                if (!success.includes(status) && moment(delivery) < moment()) {
+                  return `DATE_CROSSED`;
+                }
+                return status;
+              }}
             />
           </Box>
         </Box>
