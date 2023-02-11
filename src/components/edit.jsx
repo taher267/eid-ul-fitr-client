@@ -1,3 +1,4 @@
+'use client';
 import MainLayout from '@/layouts/mainLayout';
 import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
@@ -10,7 +11,6 @@ import React from 'react';
 import axios, { BASE_URL } from '@/axios';
 import moment from 'moment';
 import { useRouter } from 'next/dist/client/router';
-
 const DATE_FORMAT = 'YYYY-MM-DD';
 // const today = moment().format(DATE_FORMAT);
 

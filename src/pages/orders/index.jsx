@@ -9,25 +9,31 @@ import MainLayout from '@/layouts/mainLayout';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 import Link from 'next/link';
-import axios from '@/axios';
+import axios, { BASE_URL } from '@/axios';
 import { useRouter } from 'next/router';
 import React from 'react';
 import OrderActions from '@/components/header/OrdersActions';
+import useSWR from 'swr';
+
+const fetcher = (path = '') =>
+  fetch(`${BASE_URL}/${path}`).then((res) => res.json());
 
 export default function Order() {
   const [orders, setOrders] = React.useState([]);
   const [rowId, setRowId] = React.useState();
-  const { isFallback } = useRouter();
-  React.useEffect(() => {
-    axios
-      .get('orders')
-      .then(({ data }) => setOrders(data))
-      .catch((e) => {
-        alert(e?.data?.response?.message);
-        console.log(e);
-      });
-  }, []);
-  if (isFallback) {
+  const { data, error, isLoading } = useSWR(`orders`, fetcher);
+
+  // const { isFallback } = useRouter();
+  // React.useEffect(() => {
+  //   axios
+  //     .get('orders')
+  //     .then(({ data }) => setOrders(data))
+  //     .catch((e) => {
+  //       alert(e?.data?.response?.message);
+  //       console.log(e);
+  //     });
+  // }, []);
+  if (isLoading) {
     return (
       <Box
         sx={{
@@ -146,8 +152,9 @@ export default function Order() {
         <Box sx={{ width: '100%' }}>
           <Box sx={{ width: '100%' }}>
             <DataGrid
+              loading={isLoading}
               autoHeight
-              rows={orders}
+              rows={Array.isArray(data) ? data : []}
               columns={columns}
               getRowId={(row) => row._id}
             />
