@@ -12,7 +12,7 @@ import moment from 'moment';
 import { useRouter } from 'next/dist/client/router';
 
 const DATE_FORMAT = 'YYYY-MM-DD';
-const today = moment().format(DATE_FORMAT);
+// const today = moment().format(DATE_FORMAT);
 
 const onlyDefault = (
   data = {},
@@ -27,10 +27,16 @@ const onlyDefault = (
     'due',
     'order_type',
     'delivery_details',
-  ]
+  ],
+  dateTypes = ['order_date', 'delivery_date']
 ) => {
   return allows.reduce((a, c) => {
-    a[c] = data[c];
+    if (dateTypes.includes(c)) {
+      a[c] = moment(data[c]).format(DATE_FORMAT);
+    } else {
+      a[c] = data[c];
+    }
+
     return a;
   }, {});
 };

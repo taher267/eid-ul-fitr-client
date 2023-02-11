@@ -9,11 +9,21 @@ import EditOrder from '../../components/edit';
 
 export default function SingleOrder() {
   const [order, setOrder] = React.useState({});
-  const { query, pathname } = useRouter();
+  const router = useRouter();
 
   React.useEffect(() => {
-    console.log(query, '==================', pathname);
-  }, []);
+    if (!router.isReady) return;
+    if (!Object.keys(order || {}).length) {
+      const { orderId } = router.query;
+      axios
+        .get(`/orders/${orderId}`)
+        .then(({ data }) => setOrder(data || {}))
+        .catch((e) => {
+          alert(e?.response?.data?.message || e?.message);
+          constole.log(e);
+        });
+    }
+  }, [router.isReady]);
   // if (isFallback) {
   //   return (
   //     <Box
@@ -32,34 +42,12 @@ export default function SingleOrder() {
   return (
     <>
       <MainLayout>
-        <Box sx={{ padding: 2 }}>{/* <EditOrder order={order} /> */}</Box>
+        <Box sx={{ padding: 2 }}>
+          {' '}
+          {(Object.keys(order || {}).length && <EditOrder order={order} />) ||
+            ''}
+        </Box>
       </MainLayout>
     </>
   );
 }
-
-// export async function getStaticPaths() {
-//   return {
-//     // paths,
-//     paths: [
-//       {
-//         params: { orderId: '21e3f479369f78de7d9aaf02' },
-//       },
-//     ],
-//     fallback: true,
-//   };
-// }
-
-// export async function getStaticProps({ params }) {
-//   const { data } = await axios.get(`/orders/${params.orderId}`);
-//   if (!Object.keys(data || {})?.length)
-//     return {
-//       notFound: true,
-//     };
-//   const order = { ...data };
-//   order.order_date = moment(order.order_date).format('YYYY-MM-DD');
-//   order.delivery_date = moment(order.delivery_date).format('YYYY-MM-DD');
-//   return {
-//     props: { order },
-//   };
-// }
