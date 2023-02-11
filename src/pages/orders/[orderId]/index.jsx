@@ -1,9 +1,9 @@
 import MainLayout from '@/layouts/mainLayout';
 import Box from '@mui/material/Box';
-import axios from '../../axios';
+import axios from '@/axios';
 import moment from 'moment';
 import { useRouter } from 'next/dist/client/router';
-import { CircularProgress } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 import EditOrder from './edit';
 
 export default function SingleOrder({ order }) {
@@ -28,7 +28,7 @@ export async function getStaticPaths() {
     // paths,
     paths: [
       {
-        params: { orderId: 'xxxxxxxxxxxxxxxxxxxxxxxx' },
+        params: { orderId: '21e3f479369f78de7d9aaf02' },
       },
     ],
     fallback: true,

@@ -2,13 +2,14 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { Inter } from '@next/font/google';
 import styles from '@/styles/Home.module.css';
-import axios from '../axios';
+
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import MainLayout from '@/layouts/mainLayout';
 import moment from 'moment';
 import { Typography } from '@mui/material';
 import Link from 'next/link';
+import axios from '@/axios';
 
 export default function Order({ orders }) {
   // console.log(orders);
@@ -118,7 +119,9 @@ export default function Order({ orders }) {
                       <Box>
                         <Typography>
                           <Link href={`/orders/${row._id}`} passHref>
-                            <a target="_blank">View</a>
+                            <a rel="noopener noreferrer" target="_blank">
+                              View
+                            </a>
                           </Link>
                         </Typography>
                       </Box>

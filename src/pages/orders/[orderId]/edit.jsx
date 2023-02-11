@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import React from 'react';
-import axios, { BASE_URL } from '../../axios';
+import axios, { BASE_URL } from '@/axios';
 import moment from 'moment';
 import { useRouter } from 'next/dist/client/router';
 

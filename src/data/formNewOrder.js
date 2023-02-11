@@ -1,7 +1,7 @@
 import moment from 'moment';
 const DATE_FORMAT = 'YYYY-MM-DD';
 const today = moment().format(DATE_FORMAT);
-export default [
+const fields = [
   {
     name: 'order_no',
     label: 'Order No.',
@@ -132,3 +132,5 @@ export default [
     },
   },
 ];
+
+export default fields;
