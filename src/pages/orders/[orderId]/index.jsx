@@ -9,7 +9,18 @@ import EditOrder from './edit';
 export default function SingleOrder({ order }) {
   const { isFallback } = useRouter();
   if (isFallback) {
-    return <CircularProgress />;
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          height: '90vh',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
   }
 
   return (

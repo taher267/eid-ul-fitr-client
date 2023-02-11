@@ -61,7 +61,7 @@ const fields = [
     },
     valueAsNumber: true,
     inputProps: {
-      min: 0,
+      min: 1,
     },
   },
   {
@@ -73,7 +73,7 @@ const fields = [
       min: { value: 0, message: `Price can't less than 0` },
     },
     inputProps: {
-      min: 0,
+      min: 1,
     },
     valueAsNumber: true,
   },

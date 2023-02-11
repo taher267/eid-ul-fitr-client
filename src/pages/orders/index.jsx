@@ -6,13 +6,28 @@ import styles from '@/styles/Home.module.css';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import MainLayout from '@/layouts/mainLayout';
-import moment from 'moment';
-import { Typography } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import CircularProgress from '@mui/material/CircularProgress';
 import Link from 'next/link';
 import axios from '@/axios';
+import { useRouter } from 'next/router';
 
 export default function Order({ orders }) {
-  // console.log(orders);
+  const { isFallback } = useRouter();
+  if (isFallback) {
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          height: '90vh',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
   return (
     <>
       <Head>
@@ -118,10 +133,11 @@ export default function Order({ orders }) {
                     return (
                       <Box>
                         <Typography>
-                          <Link href={`/orders/${row._id}`} passHref>
-                            <a rel="noopener noreferrer" target="_blank">
+                          <Link href={`/orders/${row._id}`} target="_blank">
+                            {/* <a rel="noopener noreferrer" >
                               View
-                            </a>
+                            </a> */}
+                            View
                           </Link>
                         </Typography>
                       </Box>
