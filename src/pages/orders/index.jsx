@@ -41,101 +41,99 @@ export default function Order() {
       </Box>
     );
   }
-  const columns = React.useMemo(
-    () => [
-      { field: '_id', flex: 0.35, headerName: 'ID', hide: true },
-      {
-        field: 'order_no',
-        flex: 0.3,
-        headerName: 'Order No',
-        editable: true,
-      },
-      {
-        field: 'delivery_date',
-        type: 'dateTime',
-        flex: 1,
-        headerName: 'Delivery Date',
-        // editable: true,
-      },
-      {
-        field: 'quantity',
-        type: 'number',
-        flex: 0.3,
-        headerName: 'Quantity',
-        editable: true,
-      },
-      {
-        field: 'price',
-        type: 'number',
-        flex: 0.2,
-        headerName: 'Price',
-        editable: true,
-      },
-      {
-        field: 'discount',
-        type: 'number',
-        flex: 0.25,
-        headerName: 'Discount',
-        editable: true,
-      },
-      {
-        field: 'due',
-        type: 'number',
-        flex: 0.2,
-        headerName: 'Due',
-        editable: true,
-      },
-      {
-        field: 'status',
-        flex: 0.35,
-        headerName: 'Status',
-        headerAlign: 'center',
-        type: 'singleSelect',
-        editable: true,
-        valueOptions: [
-          'PROCESSING',
-          'ALTER',
-          'COMPLETED',
-          'DELIVERED',
-          'TRAIL',
-          'RETURN',
-        ],
-      },
-      {
-        field: 'order_type',
-        flex: 0.35,
-        headerName: 'Order Type',
-        editable: true,
-        type: 'singleSelect',
-        valueOptions: ['READYMADE', 'TAILORS'],
-      },
-      {
-        field: 'delivery_details',
+  const columns = [
+    { field: '_id', flex: 0.35, headerName: 'ID', hide: true },
+    {
+      field: 'order_no',
+      flex: 0.3,
+      headerName: 'Order No',
+      editable: true,
+    },
+    {
+      field: 'delivery_date',
+      type: 'dateTime',
+      flex: 1,
+      headerName: 'Delivery Date',
+      // editable: true,
+    },
+    {
+      field: 'quantity',
+      type: 'number',
+      flex: 0.3,
+      headerName: 'Quantity',
+      editable: true,
+    },
+    {
+      field: 'price',
+      type: 'number',
+      flex: 0.2,
+      headerName: 'Price',
+      editable: true,
+    },
+    {
+      field: 'discount',
+      type: 'number',
+      flex: 0.25,
+      headerName: 'Discount',
+      editable: true,
+    },
+    {
+      field: 'due',
+      type: 'number',
+      flex: 0.2,
+      headerName: 'Due',
+      editable: true,
+    },
+    {
+      field: 'status',
+      flex: 0.35,
+      headerName: 'Status',
+      headerAlign: 'center',
+      type: 'singleSelect',
+      editable: true,
+      valueOptions: [
+        'PROCESSING',
+        'ALTER',
+        'COMPLETED',
+        'DELIVERED',
+        'TRAIL',
+        'RETURN',
+      ],
+    },
+    {
+      field: 'order_type',
+      flex: 0.35,
+      headerName: 'Order Type',
+      editable: true,
+      type: 'singleSelect',
+      valueOptions: ['READYMADE', 'TAILORS'],
+    },
+    {
+      field: 'delivery_details',
 
-        flex: 0.6,
-        headerName: 'Customer/Delivery Details',
-        editable: true,
-      },
-      {
-        field: 'order_date',
-        type: 'dateTime',
-        flex: 1,
-        headerName: 'Order Date',
-        // editable: true,
-      },
+      flex: 0.6,
+      headerName: 'Customer/Delivery Details',
+      editable: true,
+    },
+    {
+      field: 'order_date',
+      type: 'dateTime',
+      flex: 1,
+      headerName: 'Order Date',
+      // editable: true,
+    },
 
-      {
-        field: 'Actions',
-        flex: 0.4,
-        headerName: 'Actions',
-        editable: true,
-        renderCell: ({ row }) => {
-          return <OrderActions {...{ row, rowId, setRowId }} />;
-        },
+    {
+      field: 'Actions',
+      flex: 0.4,
+      headerName: 'Actions',
+      editable: true,
+      renderCell: ({ row }) => {
+        return <OrderActions {...{ row, rowId, setRowId }} />;
       },
-    ],
-    [rowId]
-  );
+    },
+  ];
+
   return (
     <>
       <Head>
