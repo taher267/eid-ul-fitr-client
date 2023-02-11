@@ -2,7 +2,7 @@ import MainLayout from '@/layouts/mainLayout';
 import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import { Controller, useForm } from 'react-hook-form';
-import formNewOrder from '@/data/formNewOrder';
+import { updateFields } from '@/data/formNewOrder';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
@@ -87,7 +87,7 @@ export default function EditOrder({ order }) {
   return (
     <>
       <form onSubmit={handleSubmit(onUpdateSubmit)}>
-        {formNewOrder?.map?.((item) => (
+        {updateFields?.map?.((item) => (
           <Controller
             key={item.name}
             {...item}

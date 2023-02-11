@@ -11,9 +11,22 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Link from 'next/link';
 import axios from '@/axios';
 import { useRouter } from 'next/router';
+import React from 'react';
+import OrderActions from '@/components/header/OrdersActions';
 
-export default function Order({ orders }) {
+export default function Order() {
+  const [orders, setOrders] = React.useState([]);
+  const [rowId, setRowId] = React.useState();
   const { isFallback } = useRouter();
+  React.useEffect(() => {
+    axios
+      .get('orders')
+      .then(({ data }) => setOrders(data))
+      .catch((e) => {
+        alert(e?.data?.response?.message);
+        console.log(e);
+      });
+  }, []);
   if (isFallback) {
     return (
       <Box
@@ -28,6 +41,101 @@ export default function Order({ orders }) {
       </Box>
     );
   }
+  const columns = React.useMemo(
+    () => [
+      { field: '_id', flex: 0.35, headerName: 'ID', hide: true },
+      {
+        field: 'order_no',
+        flex: 0.3,
+        headerName: 'Order No',
+        editable: true,
+      },
+      {
+        field: 'delivery_date',
+        type: 'dateTime',
+        flex: 1,
+        headerName: 'Delivery Date',
+        // editable: true,
+      },
+      {
+        field: 'quantity',
+        type: 'number',
+        flex: 0.3,
+        headerName: 'Quantity',
+        editable: true,
+      },
+      {
+        field: 'price',
+        type: 'number',
+        flex: 0.2,
+        headerName: 'Price',
+        editable: true,
+      },
+      {
+        field: 'discount',
+        type: 'number',
+        flex: 0.25,
+        headerName: 'Discount',
+        editable: true,
+      },
+      {
+        field: 'due',
+        type: 'number',
+        flex: 0.2,
+        headerName: 'Due',
+        editable: true,
+      },
+      {
+        field: 'status',
+        flex: 0.35,
+        headerName: 'Status',
+        headerAlign: 'center',
+        type: 'singleSelect',
+        editable: true,
+        valueOptions: [
+          'PROCESSING',
+          'ALTER',
+          'COMPLETED',
+          'DELIVERED',
+          'TRAIL',
+          'RETURN',
+        ],
+      },
+      {
+        field: 'order_type',
+        flex: 0.35,
+        headerName: 'Order Type',
+        editable: true,
+        type: 'singleSelect',
+        valueOptions: ['READYMADE', 'TAILORS'],
+      },
+      {
+        field: 'delivery_details',
+
+        flex: 0.6,
+        headerName: 'Customer/Delivery Details',
+        editable: true,
+      },
+      {
+        field: 'order_date',
+        type: 'dateTime',
+        flex: 1,
+        headerName: 'Order Date',
+        // editable: true,
+      },
+
+      {
+        field: 'Actions',
+        flex: 0.4,
+        headerName: 'Actions',
+        editable: true,
+        renderCell: ({ row }) => {
+          return <OrderActions {...{ row, rowId, setRowId }} />;
+        },
+      },
+    ],
+    [rowId]
+  );
   return (
     <>
       <Head>
@@ -42,109 +150,7 @@ export default function Order({ orders }) {
             <DataGrid
               autoHeight
               rows={orders}
-              columns={[
-                { field: '_id', flex: 0.35, headerName: 'ID', hide: true },
-                {
-                  field: 'order_no',
-                  flex: 0.3,
-                  headerName: 'Order No',
-                  editable: true,
-                },
-                {
-                  field: 'delivery_date',
-                  type: 'dateTime',
-                  flex: 1,
-                  headerName: 'Delivery Date',
-                  // editable: true,
-                },
-                {
-                  field: 'quantity',
-                  type: 'number',
-                  flex: 0.3,
-                  headerName: 'Quantity',
-                  editable: true,
-                },
-                {
-                  field: 'price',
-                  type: 'number',
-                  flex: 0.2,
-                  headerName: 'Price',
-                  editable: true,
-                },
-                {
-                  field: 'discount',
-                  type: 'number',
-                  flex: 0.25,
-                  headerName: 'Discount',
-                  editable: true,
-                },
-                {
-                  field: 'due',
-                  type: 'number',
-                  flex: 0.2,
-                  headerName: 'Due',
-                  editable: true,
-                },
-                {
-                  field: 'status',
-                  flex: 0.35,
-                  headerName: 'Status',
-                  headerAlign: 'center',
-                  type: 'singleSelect',
-                  editable: true,
-                  valueOptions: [
-                    'PROCESSING',
-                    'ALTER',
-                    'COMPLETED',
-                    'DELIVERED',
-                    'TRAIL',
-                    'RETURN',
-                  ],
-                },
-                {
-                  field: 'order_type',
-                  flex: 0.35,
-                  headerName: 'Order Type',
-                  editable: true,
-                  type: 'singleSelect',
-                  valueOptions: ['READYMADE', 'TAILORS'],
-                },
-                {
-                  field: 'delivery_details',
-
-                  flex: 0.6,
-                  headerName: 'Customer/Delivery Details',
-                  editable: true,
-                },
-                {
-                  field: 'order_date',
-                  type: 'dateTime',
-                  flex: 1,
-                  headerName: 'Order Date',
-                  // editable: true,
-                },
-
-                {
-                  field: 'Actions',
-                  flex: 0.4,
-                  headerName: 'Actions',
-                  editable: true,
-                  renderCell: ({ row }) => {
-                    return (
-                      <Box>
-                        <Typography>
-                          <Link href={`/orders/${row._id}`} target="_blank">
-                            {/* <a rel="noopener noreferrer" >
-                              View
-                            </a> */}
-                            View
-                          </Link>
-                        </Typography>
-                      </Box>
-                    );
-                  },
-                },
-              ]}
+              columns={columns}
               getRowId={(row) => row._id}
             />
           </Box>
@@ -154,9 +160,9 @@ export default function Order({ orders }) {
   );
 }
 
-export const getStaticProps = async () => {
-  const { data } = await axios.get('orders');
-  return {
-    props: { orders: data },
-  };
-};
+// export const getStaticProps = async () => {
+//   const { data } = await axios.get('orders');
+//   return {
+//     props: { orders: data },
+//   };
+// };
