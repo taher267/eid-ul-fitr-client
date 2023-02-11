@@ -6,8 +6,8 @@ import axios from '../axios';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import MainLayout from '@/layouts/mainLayout';
-
-const inter = Inter({ subsets: ['latin'] });
+import moment from 'moment';
+import { Typography } from '@mui/material';
 
 export default function Order({ orders }) {
   // console.log(orders);
@@ -26,7 +26,7 @@ export default function Order({ orders }) {
               autoHeight
               rows={orders}
               columns={[
-                { field: '_id', flex: 0.35, headerName: 'ID', hide: false },
+                { field: '_id', flex: 0.35, headerName: 'ID', hide: true },
                 {
                   field: 'order_no',
                   flex: 0.3,
@@ -34,19 +34,36 @@ export default function Order({ orders }) {
                   editable: true,
                 },
                 {
+                  field: 'delivery_date',
+                  type: 'dateTime',
+                  flex: 1,
+                  headerName: 'Delivery Date',
+                  // editable: true,
+                },
+                {
                   field: 'quantity',
+                  type: 'number',
                   flex: 0.3,
                   headerName: 'Quantity',
                   editable: true,
                 },
                 {
                   field: 'price',
+                  type: 'number',
                   flex: 0.2,
                   headerName: 'Price',
                   editable: true,
                 },
                 {
+                  field: 'discount',
+                  type: 'number',
+                  flex: 0.25,
+                  headerName: 'Discount',
+                  editable: true,
+                },
+                {
                   field: 'due',
+                  type: 'number',
                   flex: 0.2,
                   headerName: 'Due',
                   editable: true,
@@ -77,15 +94,35 @@ export default function Order({ orders }) {
                 },
                 {
                   field: 'delivery_details',
+
                   flex: 0.6,
                   headerName: 'Customer/Delivery Details',
                   editable: true,
                 },
                 {
                   field: 'order_date',
-                  flex: 0.5,
+                  type: 'dateTime',
+                  flex: 1,
                   headerName: 'Order Date',
+                  // editable: true,
+                },
+
+                {
+                  field: 'Actions',
+                  flex: 0.4,
+                  headerName: 'Actions',
                   editable: true,
+                  renderCell: ({ row }) => {
+                    return (
+                      <Box>
+                        <Typography>
+                          <a target="_blank" href={`/orders/${row._id}`}>
+                            View
+                          </a>
+                        </Typography>
+                      </Box>
+                    );
+                  },
                 },
               ]}
               getRowId={(row) => row._id}
