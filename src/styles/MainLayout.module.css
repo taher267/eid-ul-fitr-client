@@ -1,4 +1,4 @@
-/* .layoutContainer {
+.layoutContainer {
   height: 97.66vh;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -27,4 +27,4 @@
 .layoutMenu {
   grid-area: m;
   background-color: lightblue;
-} */
+}

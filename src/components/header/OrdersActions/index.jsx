@@ -6,6 +6,7 @@ import axios from '@/axios';
 
 export default function OrderActions({ row }) {
   const delHandler = () => {
+    if (!confirm(`Would you like to delete this`)) return;
     axios
       .delete(`orders/${row._id}`)
       .then((d) => console.log(d))

@@ -56,8 +56,8 @@ export default function EditOrder({ order }) {
 
   const onUpdateSubmit = async (UpdateData) => {
     const copyUpdateDatas = { ...UpdateData };
-    if (!copyUpdateDatas?.delivery_details)
-      delete copyUpdateDatas?.delivery_details;
+    // if (!copyUpdateDatas?.delivery_details)
+    //   delete copyUpdateDatas?.delivery_details;
     const discount = copyUpdateDatas?.discount;
     if (discount === undefined || discount === null || discount === '')
       delete copyUpdateDatas?.discount;
@@ -72,10 +72,12 @@ export default function EditOrder({ order }) {
     axios
       .put(`orders/${order._id}`, copyUpdateDatas)
       .then(({ data }) => {
-        console.log(data);
+        alert(`Alhamdu lillah successfull updated`);
+        // console.log(data);
       })
       .catch((e) => {
         if (e?.response?.data?.errors) setInputErrs(e?.response?.data?.errors);
+        alert(`Fail to update`);
         console.log(e);
       })
       .finally(() => setLoading(false));

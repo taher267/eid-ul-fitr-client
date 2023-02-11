@@ -14,12 +14,13 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import OrderActions from '@/components/header/OrdersActions';
 import useSWR from 'swr';
+import moment from 'moment';
 
 const fetcher = (path = '') =>
   fetch(`${BASE_URL}/${path}`).then((res) => res.json());
 
 export default function Order() {
-  const [orders, setOrders] = React.useState([]);
+  // const [orders, setOrders] = React.useState([]);
   const [rowId, setRowId] = React.useState();
   const { data, error, isLoading } = useSWR(`orders`, fetcher);
 
@@ -58,14 +59,14 @@ export default function Order() {
     {
       field: 'delivery_date',
       type: 'dateTime',
-      flex: 1,
+      flex: 0.35,
       headerName: 'Delivery Date',
-      // editable: true,
+      valueGetter: ({ row }) => moment(row.delivery_date).format('YYYY-MM-DD'),
     },
     {
       field: 'quantity',
       type: 'number',
-      flex: 0.3,
+      flex: 0.25,
       headerName: 'Quantity',
       editable: true,
     },
@@ -92,7 +93,7 @@ export default function Order() {
     },
     {
       field: 'status',
-      flex: 0.35,
+      flex: 0.45,
       headerName: 'Status',
       headerAlign: 'center',
       type: 'singleSelect',
@@ -117,16 +118,16 @@ export default function Order() {
     {
       field: 'delivery_details',
 
-      flex: 0.6,
+      flex: 1,
       headerName: 'Customer/Delivery Details',
       editable: true,
     },
     {
       field: 'order_date',
       type: 'dateTime',
-      flex: 1,
+      flex: 0.45,
       headerName: 'Order Date',
-      // editable: true,
+      valueGetter: ({ row }) => moment(row.order_date).format('YYYY-MM-DD'),
     },
 
     {

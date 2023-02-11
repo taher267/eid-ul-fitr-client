@@ -1,0 +1,30 @@
+.layoutContainer {
+  height: 97.66vh;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 50px 1fr 50px;
+  grid-template-areas:
+    'h h h h h h h h h h h h'
+    'm c c c c c c c c c c c'
+    'f f f f f f f f f f f f';
+}
+.layoutContainer > div {
+  display: flex;
+}
+.layoutHeader {
+  grid-area: h;
+  /* background-color: red; */
+}
+
+.layoutFooter {
+  grid-area: f;
+  background-color: blue;
+}
+.layoutContent {
+  grid-area: c;
+  background-color: skyblue;
+}
+.layoutMenu {
+  grid-area: m;
+  background-color: lightblue;
+}

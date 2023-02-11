@@ -4,7 +4,8 @@ import Box from '@mui/material/Box';
 import Nav from '../Nav';
 import Head from 'next/head';
 // import csses from './layout.module.css';
-// import styles from '@/styles/Home.module.css';
+// import styles from '@/styles/MainLayout.module.css';
+import csses from '@/styles/MainLayout.module.css';
 
 const theme = createTheme({
   palette: {
@@ -16,7 +17,7 @@ export default function MainLayout({ children }) {
   return (
     <>
       <Head>
-        <link rel="stylesheet" href="./layout.css" />
+        <title>Orders | Panzabi.com</title>
       </Head>
       <ThemeProvider theme={theme}>
         <Box className="layoutContainer">
