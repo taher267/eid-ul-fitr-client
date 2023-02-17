@@ -75,6 +75,8 @@
     --PROCESSING: rgba(255, 201, 201, 0.5);
     --ALTER: rgba(240, 198, 7, 0.5);
     --RETURN: rgba(203, 200, 184, 0.5);
+    --TOMORROW: rgba(243, 247, 0, 0.762);
+    --TOMORROW_S_NEXT: #f78400;
   }
 }
 
@@ -126,6 +128,22 @@ a {
 }
 .RETURN {
   background-color: var(--RETURN);
+  color: #fff;
+}
+.TOMORROW {
+  background: var(--TOMORROW) !important;
+  color: #fff;
+}
+.TOMORROW_S_NEXT {
+  background-color: var(--TOMORROW_S_NEXT);
+  color: #fff;
+}
+.TODAY {
+  background: linear-gradient(
+    84deg,
+    var(--TOMORROW_S_NEXT),
+    var(--TOMORROW)
+  ) !important;
   color: #fff;
 }
 
