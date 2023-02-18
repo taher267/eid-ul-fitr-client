@@ -199,7 +199,7 @@ export default function Order() {
               getRowClassName={(params) => {
                 const status = params.row.status;
                 const delivery = params.row.delivery_date;
-                const success = ['DELIVIRED', 'COMPLETED'];
+                const success = ['DELIVERED', 'COMPLETED'];
                 if (!success.includes(status)) {
                   if (
                     moment(delivery).isSame(moment().add(-1, 'days'), 'day')
