@@ -110,9 +110,9 @@ a {
   color: #fff;
   background-color: var(--DANGER);
 }
-.DELIVIRED {
+.DELIVERED {
   color: #fff;
-  background-color: var(--DELIVIRED);
+  background-color: var(--DELIVERED);
 }
 .COMPLETED {
   color: #fff;
