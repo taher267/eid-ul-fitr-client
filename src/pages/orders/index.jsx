@@ -190,7 +190,7 @@ export default function Order() {
             <DataGrid
               loading={isLoading}
               autoHeight
-              rows={Array.isArray(data) ? data : []}
+              rows={Array.isArray(data) ? [...data].reverse() : []}
               columns={columns}
               getRowId={(row) => row._id}
               components={{
