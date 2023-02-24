@@ -21,7 +21,7 @@ export default function SingleOrder() {
       : null,
     fetcher
   );
-
+  console.log(data);
   // React.useEffect(() => {
   //   if (!router.isReady) return;
   //   if (!Object.keys(order || {}).length) {

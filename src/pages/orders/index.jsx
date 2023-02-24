@@ -4,10 +4,8 @@ import { Inter } from '@next/font/google';
 import styles from '@/styles/Home.module.css';
 
 import Box from '@mui/material/Box';
-import {
-  DataGridPremium as DataGrid,
-  GridToolbar,
-} from '@mui/x-data-grid-premium';
+// import { GridToolbar, DataGrid } from '@mui/x-data-grid';
+import { DataGridPremium } from '@mui/x-data-grid-premium';
 import MainLayout from '@/layouts/mainLayout';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -190,15 +188,13 @@ export default function Order() {
                 />
               </Typography>
             </Box>
-            <DataGrid
+            <DataGridPremium
               loading={isLoading}
               autoHeight
               rows={Array.isArray(data) ? [...data].reverse() : []}
               columns={columns}
               getRowId={(row) => row._id}
-              components={{
-                Toolbar: GridToolbar,
-              }}
+              // components={{ Toolbar: GridToolbar }}
               getRowClassName={(params) => {
                 const status = params.row.status;
                 const delivery = params.row.delivery_date;
