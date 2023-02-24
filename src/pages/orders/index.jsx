@@ -4,7 +4,10 @@ import { Inter } from '@next/font/google';
 import styles from '@/styles/Home.module.css';
 
 import Box from '@mui/material/Box';
-import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import {
+  DataGridPremium as DataGrid,
+  GridToolbar,
+} from '@mui/x-data-grid-premium';
 import MainLayout from '@/layouts/mainLayout';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
