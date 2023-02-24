@@ -182,7 +182,7 @@ export default function Order() {
                   sx={{
                     width: '80px',
                     background:
-                      'linear-gradient(84deg, var(--TOMORROW_S_NEXT),var(--TOMORROW))',
+                      'linear-gradient(84deg, var(--TOMORROW_S_NEXT),var(--DANGER))',
                     marginLeft: 2,
                   }}
                 />

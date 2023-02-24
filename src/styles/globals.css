@@ -142,7 +142,7 @@ a {
   background: linear-gradient(
     84deg,
     var(--TOMORROW_S_NEXT),
-    var(--TOMORROW)
+    var(--DANGER)
   ) !important;
   color: #fff;
 }
