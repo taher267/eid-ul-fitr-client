@@ -58,7 +58,7 @@ export default function Order() {
     },
     {
       field: 'delivery_date',
-      type: 'dateTime',
+      // type: 'dateTime',
       flex: 0.35,
       headerName: 'Delivery Date',
       valueGetter: ({ row }) => moment(row.delivery_date).format('YYYY-MM-DD'),
@@ -123,7 +123,7 @@ export default function Order() {
     },
     {
       field: 'order_date',
-      type: 'dateTime',
+      // type: 'dateTime',
       flex: 0.45,
       headerName: 'Order Date',
       valueGetter: ({ row }) => moment(row.order_date).format('YYYY-MM-DD'),
